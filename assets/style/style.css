@@ -1,1 +1,60 @@
 /* BASIC STYLES HERE */
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: black;
+  color: violet;
+  position: fixed;
+  position: sticky;
+  padding: 1em;
+}
+
+.bg {
+  background-color: rgb(0, 0, 0);
+  color: violet;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: rgb(0, 0, 0);
+  color: violet;
+  /* position: fixed; */
+}
+
+
+.footer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  position: static;
+  top: 0px;
+  left: 0px;
+}
+
+.note-list {
+  display: flex;
+  width: 40px;
+  position: sticky;
+  position: left;
+  align-items: flex-end;
+}
+
+note-bar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.main-body {
+  flex: 1 1 70%;
+  min-width: 30ch;
+}
+
+side-bar {
+  flex: 1 1 30%;
+  min-width: 30ch;
+}

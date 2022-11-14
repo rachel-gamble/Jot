@@ -1,5 +1,43 @@
 Jot
 ============
+1. Format the HTML
+    - nav bar to the left. text body to the main
+2. Find 2 form links
+    - one with a huge text field
+    - one a one line, with color picker
+3. Make all the Models/Service/!SECTION
+
+HEADER: Jot icon. Load?
+BODY: the start page, then write a note
+NAV: 
+
+Style Ideas: Poet. DND character notes.
+
+
+drop down color picker / or hex picker Bootstrap
+
+
+Icons for JOT logo in the header.
+
+Add the extras:
+Placeholder on load in to website
+off site text for note
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Get Started
 
