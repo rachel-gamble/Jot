@@ -21,29 +21,29 @@ function _drawActiveNote() {
     // setText("active-note", appState.activeNote)
     let active = appState.activeNote
     template += active.ActiveTemplate
-    console.log('drawing active', active)
-    // setHTML('active-note', template)
+    console.log('drawing active', template)
+    setHTML('active-note', template)
 }
 
-// function _drawActiveNote() {
-// setHTML('details', appState.activeNote.ActiveTemplate)
+// _draw notescount(){
+// look at how many things are in the notes array in the appstate
+// draw that number somewhere to the page
 // }
-
-// function _drawListTemplate() {
-//     let template = ''
-// }
-
 
 export class NotesController {
 
     constructor() {
+        _drawNotes()
         console.log("your note controller is working")
         appState.on('notes', _drawNotes)
         appState.on('activeNote', _drawActiveNote)
         _drawNotes()
+        // draw notes count
+        // draw notescount everytime notes changes
     }
 
     setActive(noteId) {
+        // debugger
         notesService.setActive(noteId)
         console.log('setting active', noteId)
         _drawNotes()
@@ -63,18 +63,21 @@ export class NotesController {
         // _drawNotes()
     }
     // save note is working
-    // saveNote() {
-    //     window.event.preventDefault()
-    //     let form = window.event.target.noteName.value
-    //     // let newNote = document.querySelector('.note')
-    //     let formData = getFormData(form)
-    //     console.log(formData);
-    //     notesService.saveNote(formData)
-    //     // window.event.target.reset()
-    // }
+    saveNote() {
+        // let form = window.event.target.noteName.value
+        // let newNote = document.querySelector('.note')
+        // let formData = getFormData(form)
+        // window.event.target.reset()
+        window.event.preventDefault()
+        let note = document.getElementById('activeNote')
+        console.log(note)
+        // we want to send in the value of the textarea... send in the value of note
+        notesService.saveNote(formData)
+    }
 
     async removeNote(noteId) {
         if (await Pop.confirm('Are you sure you want to delete this note?')) {
+
             notesService.removeNote(noteId)
         }
     }

@@ -14,33 +14,36 @@ class NotesService {
         console.log(newNote);
     }
 
-    setActive(name) {
+    setActive(noteId) {
         console.log('set active service', name)
-        let active = appState.notes.find(n => n.name == name)
+        let active = appState.notes.find(n => n.id == noteId)
         appState.activeNote = active
         console.log(appState.activeNote)
     }
 
     saveNote(newNote) {
         let activeNote = appState.activeNote
-        activeNote.unlocked = false
-        activeNote.note = newNote
+        // activeNote.unlocked = false
+        // 
+        activeNote.body = newNote
+        // change the activeNote's updated time to be the current time : new Date()
         appState.emit('activeNote')
         saveState('notes', appState.notes)
     }
 
-    toggleVisibility(){
+    toggleVisibility() {
         let toggleElm = document.getElementById('toggleVisibility')
-        if (toggleElm.style.visibility == "visible"){
+        if (toggleElm.style.visibility == "visible") {
             toggleElm.style.visibility = "hidden"
         } else {
             toggleElm.style.visibility = "visible"
         }
     }
 
-    removeNote(note) {
-        let filteredArray = appState.notes.filter(n => n.name != noteName)
-        appState.notes.filteredArray
+    removeNote(noteId) {
+        debugger
+        let filteredArray = appState.notes.filter(n => n.id != noteId)
+        appState.notes = filteredArray
         console.log('New array in AppState:', appState.notes);
         saveState('notes', appState.notes)
     }

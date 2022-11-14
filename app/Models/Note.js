@@ -10,14 +10,14 @@ export class Note {
     this.name = data.name
     // this.color = data.color
     this.createdAt = new Date()
-    this.body = data.body
-    // this.updated = data.updated
+    this.body = data.body || "Type your note here..."
+    this.updated = data.updated || new Date().toLocaleDateString()
   }
 
 
   get ListTemplate() {
     return /*html*/`
-    <div class="col-12 p-2 selectable d-flex flex-wrap" onclick="app.notesController.setActive('${this.iD}')">
+    <div class="col-12 p-2 selectable d-flex flex-wrap" onclick="app.notesController.setActive('${this.id}')">
     <div class="row">
       <div class="col-1"><i class="mdi mdi-music"></i>
       </div>
@@ -27,6 +27,7 @@ export class Note {
         <h6>${this.createdAt}</h6>
       </div>
       <button class="btn btn-success col-3" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button>
+      <button type="reset" class="btn btn-outline-danger col-3">Delete</button>
     </div>
   </div>
         `
@@ -34,13 +35,15 @@ export class Note {
 
   get ActiveTemplate() {
     return /*html*/ `
-        <div class="col-7 d-flex flex-wrap p-2" id="exampleModalLabel">${this.noteId}</div>
+        <div class="col-7 d-flex flex-wrap p-2" id="exampleModalLabel">${this.name}</div>
         <h5>${this.createdAt.toLocaleDateString()}</h5>
+        <h5>${this.updated}</h5>
+
         <form class="d-flex flex-wrap bg-dark text-primary p-2" onsubmit="app.notesController.saveNote()">
-              <textarea class="form-control" rows="20" cols="25" placeholder="Note Body" id="active-note"
+              <textarea class="form-control" rows="20" cols="25" placeholder="Note Body" id="activeNote"
                 name="activeNote">${this.body}</textarea>
               <button type="save" class="btn btn-success mt-3" onclick="app.notesController.saveNote()">Save</button>
-              <button type="reset" class="btn btn-outline-danger mt-3">Delete</button>
+              <button type="reset" class="btn btn-outline-danger mt-3" onclick="app.notesController.removeNote('${this.id}')">Delete</button>
               </form>
         `    }
 
