@@ -1,4 +1,5 @@
 // import { appState } from "../AppState.js"
+import { appState } from "../AppState.js"
 import { generateId } from "../Utils/generateId.js"
 
 
@@ -10,8 +11,8 @@ export class Note {
     this.name = data.name
     // this.color = data.color
     this.createdAt = new Date()
-    this.body = data.body || "Type your note here..."
-    this.updated = data.updated || new Date().toLocaleDateString()
+    this.body = data.body || 'Type your note here...'
+    this.updated = data.updated || new Date().toLocaleString()
   }
 
 
@@ -24,27 +25,25 @@ export class Note {
       <div class="col-4">${this.name}
       </div>
       <div class="col-5">
-        <h6>${this.createdAt}</h6>
+        <h6>${this.createdAt.toLocaleString()}</h6>
       </div>
-      <button class="btn btn-success col-3" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button>
-      <button type="reset" class="btn btn-outline-danger col-3">Delete</button>
     </div>
   </div>
         `
   }
 
   get ActiveTemplate() {
-    return /*html*/ `
+    return `
         <div class="col-7 d-flex flex-wrap p-2" id="exampleModalLabel">${this.name}</div>
         <h5>${this.createdAt.toLocaleDateString()}</h5>
-        <h5>${this.updated}</h5>
+        <h5>${this.updated.toLocaleString()}</h5>
 
-        <form class="d-flex flex-wrap bg-dark text-primary p-2" onsubmit="app.notesController.saveNote()">
-              <textarea class="form-control" rows="20" cols="25" placeholder="Note Body" id="activeNote"
-                name="activeNote">${this.body}</textarea>
-              <button type="save" class="btn btn-success mt-3" onclick="app.notesController.saveNote()">Save</button>
-              <button type="reset" class="btn btn-outline-danger mt-3" onclick="app.notesController.removeNote('${this.id}')">Delete</button>
-              </form>
+        <div class="d-flex flex-wrap bg-dark text-primary p-2">
+              <textarea class="form-control" rows="20" cols="25" id="open-note"
+                name="" onblur="app.notesController.saveNote()">${this.body}</textarea>
+        </div>
+        <button type="" class="btn btn-success mt-3" onclick="app.notesController.saveNote()">Save</button>
+        <button type="reset" class="btn btn-outline-danger mt-3" onclick="app.notesController.removeNote('${this.id}')">Delete</button>
         `    }
 
   static GetNewNoteTemplate() {
@@ -59,13 +58,20 @@ export class Note {
             name="note-body">${this.body}</textarea>
           <button type="save" class="btn btn-success mt-3">Save</button>
           <button type="reset" class="btn btn-outline-danger mt-3">Delete</button>
-          <form onsubmit="app.notesController.saveNote()">
-          </form>
+        </form>
+          
             `
   }
+  // <form onsubmit="app.notesController.saveNote()">
 
   get ComputeDate() {
     let date = this.date
     return this.date.toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" })
+  }
+
+  get ComputeQuantity() {
+    let quantity = appState.notes.filter(q => q.id == this.id).length
+    console.log('you have', quantity, this.id)
+    return quantity
   }
 }

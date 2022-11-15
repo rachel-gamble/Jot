@@ -17,18 +17,24 @@ function _drawNotes() {
 }
 
 function _drawActiveNote() {
-    let template = ''
-    // setText("active-note", appState.activeNote)
-    let active = appState.activeNote
-    template += active.ActiveTemplate
-    console.log('drawing active', template)
-    setHTML('active-note', template)
+    // if(appState.activeNote = null){
+    //     setHTML('choose a note')
+    // }
+    // else {
+    //    setHTML('active-note', activeNote.ActiveTemplate)
+    // }
+    let activeNote = appState.activeNote
+    console.log('drawing active', activeNote)
+    setHTML('active-note', activeNote.ActiveTemplate)
 }
 
-// _draw notescount(){
-// look at how many things are in the notes array in the appstate
-// draw that number somewhere to the page
-// }
+function _drawQuantity() {
+    let notes = appState.notes
+    setText('quantity', notes.length)
+
+    // look at how many things are in the notes array in the appState
+    // draw that number somewhere to the page
+}
 
 export class NotesController {
 
@@ -38,15 +44,17 @@ export class NotesController {
         appState.on('notes', _drawNotes)
         appState.on('activeNote', _drawActiveNote)
         _drawNotes()
+        _drawQuantity()
+        appState.on('notes', _drawQuantity)
         // draw notes count
         // draw notescount everytime notes changes
     }
 
     setActive(noteId) {
-        // debugger
-        notesService.setActive(noteId)
+
         console.log('setting active', noteId)
-        _drawNotes()
+        notesService.setActive(noteId)
+        // _drawNotes()
     }
 
     createNote() {
@@ -58,28 +66,35 @@ export class NotesController {
         let formData = getFormData(form)
         console.log(formData);
         notesService.createNote(formData)
-        this.setActive(noteId)
+        // this.setActive(noteId)
         form.reset()
         // _drawNotes()
     }
-    // save note is working
-    saveNote() {
-        // let form = window.event.target.noteName.value
-        // let newNote = document.querySelector('.note')
-        // let formData = getFormData(form)
-        // window.event.target.reset()
-        window.event.preventDefault()
-        let note = document.getElementById('activeNote')
-        console.log(note)
-        // we want to send in the value of the textarea... send in the value of note
-        notesService.saveNote(formData)
+
+    addQuantity() {
+        console.log('adding note');
+        notesService.addQuantity()
     }
+
+    // save note is working
 
     async removeNote(noteId) {
         if (await Pop.confirm('Are you sure you want to delete this note?')) {
 
             notesService.removeNote(noteId)
         }
+    }
+    saveNote() {
+        // let form = window.event.target.noteName.value
+        // let newNote = document.querySelector('.note')
+        // let formData = getFormData(form)
+        // window.event.target.reset()
+        // window.event.preventDefault()
+        let newNote = document.getElementById('open-note')
+        // let newNote = document.querySelector('.body')
+        // we want to send in the value of the textarea... send in the value of note
+        console.log(newNote.value, 'note body');
+        notesService.saveNote(newNote.value)
     }
 
 

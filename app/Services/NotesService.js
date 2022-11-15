@@ -9,9 +9,9 @@ class NotesService {
         let newNote = new Note(formData)
         appState.notes = [...appState.notes, newNote]
         // newNote.unlocked = true
-        // appState.activeNote = newNote
+        appState.activeNote = newNote
         saveState('notes', appState.notes)
-        console.log(newNote);
+        // console.log(newNote);
     }
 
     setActive(noteId) {
@@ -23,11 +23,11 @@ class NotesService {
 
     saveNote(newNote) {
         let activeNote = appState.activeNote
-        // activeNote.unlocked = false
-        // 
         activeNote.body = newNote
+        activeNote.updated = new Date()
         // change the activeNote's updated time to be the current time : new Date()
         appState.emit('activeNote')
+        // activeNote.currentDate = new Date()
         saveState('notes', appState.notes)
     }
 
@@ -41,9 +41,9 @@ class NotesService {
     }
 
     removeNote(noteId) {
-        debugger
         let filteredArray = appState.notes.filter(n => n.id != noteId)
         appState.notes = filteredArray
+        appState.activeNote = null
         console.log('New array in AppState:', appState.notes);
         saveState('notes', appState.notes)
     }
