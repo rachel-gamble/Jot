@@ -21,64 +21,52 @@
 <body class="bg">
   <header class="header">
     <h1>
-      <span class="ms-2 fs-3 title p-2"><i class="mdi mdi-music-note"></i> POET</span>
+      <span class="ms-2 title p-2"><i class="mdi mdi-music-note"></i> POET</span>
     </h1>
-    <!-- <button class="btn btn-success" onclick="app.notesController.showNotes()"><i class="mdi mdi-notebook-multiple"></i>
-      <h6> notes</h6>
-    </button> -->
-    <button class="btn btn-success" id="notes" onclick="app.notesController.createNote()">
-      <i class="mdi mdi-note-plus-outline"></i>
-      <h6> new note</h6>
-    </button>
-    </div>
-    <!-- <i class="mdi mdi-content-save"></i> -->
   </header>
 
   <main>
     <div class="container-fluid">
-      <div class="row body">
-        <div class="col-3 side-bar">
-
-
-          <!--I want to move this section to the main body; but how do I make the "new note" button in nav link to id?-->
-          <section>
-            <div class="col-2 text-center" id="notes"></div>
-            <form class="text-primary p-2 col-7" onsubmit="app.notesController.createNote()">
-              <div class="form-floating mb-3 col-12">
-                <input class="form-control w-100" required type="text" minlength="3" maxlength="15" row="20"
-                  id="note-name" placeholder="Enter title here" name="name">
-                <label for="note-name">Title
-                </label>
-                <!-- <textarea class="form-control" rows="20" cols="25" placeholder="Note Body" id="note-body"
-                  name="note-body"></textarea> -->
-                <div>
-                  <label for="note-color">
-                    <i class="mdi mdi-music-note"></i>
-                    <input type="color" value="#009900" id="note-color" rows="1">
+      <div class="row">
+        <div class="col-12 body">
+          <div class="side-bar">
+            <section>
+              <div class="col-3 text-center" id="notes"></div>
+              <form class="text-primary p-2" onsubmit="app.notesController.createNote()">
+                <div class="form-floating mb-3 col-10">
+                  <input class="form-control w-100" required type="text" minlength="3" maxlength="15" row="20"
+                    id="note-name" placeholder="Enter title here" name="name">
+                  <label for="note-name">Title
                   </label>
+                  <div>
+                    <label for="note-color"class="p-2">
+                      <i class="mdi mdi-music-note p-2"></i>
+                      <input type="color" value="#009900" id="note-color" rows="1">
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <button type="save" class="btn btn-success mt-3">Save</button>
-            </form>
-          </section>
+                <button type="save" class="btn btn-success mt-3">Save</button>
+              </form>
+            </section>
 
 
-          <section>
-            <p>Total notes: <span id="quantity">0</span></p>
-          </section>
-          <section id="note-list" class="newNote side-bar">
+            <section>
+              <p>Total notes: <span id="quantity">0</span></p>
+            </section>
+            <section id="note-list" class="newNote side-bar">
 
 
-          </section>
-          <!--trying to make note count appear here-->
-        </div>
-        <div class="col-9">
-          <div id="active-note">
-
+            </section>
+            <!--trying to make note count appear here-->
+          </div>
+          <div class="col-8">
+            <div id="active-note">
+            </div>
+            </div>
           </div>
         </div>
       </div>
-
+    </div>
   </main>
 
   <footer>

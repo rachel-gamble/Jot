@@ -1,13 +1,14 @@
 /* BASIC STYLES HERE */
 .header {
   display: flex;
+  position: fixed;
+  position: sticky;
   flex-direction: row;
   flex-wrap: nowrap;
   background-color: black;
   color: violet;
-  position: fixed;
-  position: sticky;
   padding: 1em;
+  padding-top: 2em;
 }
 
 .bg {

@@ -17,15 +17,15 @@ function _drawNotes() {
 }
 
 function _drawActiveNote() {
-    // if(appState.activeNote = null){
+    let activeNote = appState.activeNote
+    console.log('drawing active', activeNote)
+    setHTML('active-note', activeNote.ActiveTemplate)
+    // if(appState.activeNote == null){
     //     setHTML('choose a note')
     // }
     // else {
     //    setHTML('active-note', activeNote.ActiveTemplate)
     // }
-    let activeNote = appState.activeNote
-    console.log('drawing active', activeNote)
-    setHTML('active-note', activeNote.ActiveTemplate)
 }
 
 function _drawQuantity() {
@@ -35,6 +35,7 @@ function _drawQuantity() {
     // look at how many things are in the notes array in the appState
     // draw that number somewhere to the page
 }
+
 
 export class NotesController {
 
@@ -58,17 +59,12 @@ export class NotesController {
     }
 
     createNote() {
-        //   let newNote = new Note(formdata)
-        //   appState.notes = [...appState.notes, newNote]
         window.event.preventDefault()
-        // saveState('notes', appState.notes)
         let form = window.event.target
         let formData = getFormData(form)
         console.log(formData);
         notesService.createNote(formData)
-        // this.setActive(noteId)
         form.reset()
-        // _drawNotes()
     }
 
     addQuantity() {
@@ -80,16 +76,10 @@ export class NotesController {
 
     async removeNote(noteId) {
         if (await Pop.confirm('Are you sure you want to delete this note?')) {
-
             notesService.removeNote(noteId)
         }
     }
     saveNote() {
-        // let form = window.event.target.noteName.value
-        // let newNote = document.querySelector('.note')
-        // let formData = getFormData(form)
-        // window.event.target.reset()
-        // window.event.preventDefault()
         let newNote = document.getElementById('open-note')
         // let newNote = document.querySelector('.body')
         // we want to send in the value of the textarea... send in the value of note
@@ -98,7 +88,9 @@ export class NotesController {
     }
 
 
+
     showNotes() {
         _drawNotes()
     }
+
 }
