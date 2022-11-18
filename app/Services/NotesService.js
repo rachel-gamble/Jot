@@ -44,8 +44,9 @@ class NotesService {
         let filteredArray = appState.notes.filter(n => n.id != noteId)
         appState.notes = filteredArray
         // appState.activeNote = null
-        console.log('New array in AppState:', appState.notes);
+        // console.log('New array in AppState:', appState.notes);
         saveState('notes', appState.notes)
+        appState.activeNote = null
     }
 }
 

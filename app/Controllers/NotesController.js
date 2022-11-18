@@ -19,13 +19,13 @@ function _drawNotes() {
 function _drawActiveNote() {
     let activeNote = appState.activeNote
     console.log('drawing active', activeNote)
-    setHTML('active-note', activeNote.ActiveTemplate)
-    // if(appState.activeNote == null){
-    //     setHTML('choose a note')
-    // }
-    // else {
-    //    setHTML('active-note', activeNote.ActiveTemplate)
-    // }
+    // setHTML('active-note', activeNote.ActiveTemplate)
+    if (appState.activeNote) {
+        setHTML('active-note', activeNote.ActiveTemplate)
+    }
+    else {
+        setHTML('active-note', '')
+    }
 }
 
 function _drawQuantity() {
@@ -41,7 +41,7 @@ export class NotesController {
 
     constructor() {
         _drawNotes()
-        console.log("your note controller is working")
+        // console.log("your note controller is working")
         appState.on('notes', _drawNotes)
         appState.on('activeNote', _drawActiveNote)
         _drawNotes()
@@ -79,6 +79,7 @@ export class NotesController {
             notesService.removeNote(noteId)
         }
     }
+
     saveNote() {
         let newNote = document.getElementById('open-note')
         // let newNote = document.querySelector('.body')
