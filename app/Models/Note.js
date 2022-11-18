@@ -12,6 +12,7 @@ export class Note {
     this.createdAt = new Date()
     this.body = data.body || 'Type your note here...'
     this.updated = data.updated || new Date().toLocaleString()
+    this.color = data.color
   }
 
 
@@ -33,7 +34,7 @@ export class Note {
 
   get ActiveTemplate() {
     return `
-        <div class="col-7 d-flex flex-wrap p-2 main-body" id="exampleModalLabel"><h2>${this.name}</h2></div>
+        <div style="color: ${this.color}" class="col-7 d-flex flex-wrap p-2 main-body" id="exampleModalLabel"><h2>${this.name}</h2></div>
         <h6>Created: ${this.createdAt.toLocaleDateString()}</h6>
         <h6>Last Updated: ${this.updated.toLocaleString()}</h6>
 
